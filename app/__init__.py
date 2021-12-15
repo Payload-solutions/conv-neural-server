@@ -1,4 +1,6 @@
 
+
+import flask
 from flask import Flask
 from config import Config
 import os
@@ -7,6 +9,9 @@ import os
 from .errors import create_error_handler
 from .routes import create_routes
 
+
+# custom variables
+flask_app = flask.app.Flask
 
 
 def get_environment_config():
@@ -18,7 +23,7 @@ def get_environment_config():
         return "config.ProductionConfig"
 
 
-def create_app():
+def create_app() -> flask_app:
 
     app = Flask(__name__)
 
