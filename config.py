@@ -1,14 +1,19 @@
 import os
-import click
-
 
 class Config:
-    ENV = os.environ["ENV"] if "ENV" in os.environ else "DEVELOPMENT"
+    FLASK_ENV = "development"
+    DEBUG=False
+    TESTING=False
     CSRF_ENABLED = True
     SECRET_KEY = "this is the secret key"
 
 class DevelopmentConfig(Config):
     DEBUG=True
 
-class TestingConfig():
+class TestingConfig(Config):
+    TESTING=True
+    DEBUG=False
+
+class ProductionConfig(Config):
+    FLASK_ENV = 'production'
     DEBUG=False
