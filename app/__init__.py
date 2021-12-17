@@ -1,5 +1,4 @@
 
-
 import flask
 from flask import Flask
 from config import Config
@@ -17,10 +16,10 @@ flask_app = flask.app.Flask
 def get_environment_config():
     if Config.FLASK_ENV == "testing":
         return "config.TestConfig"
-    elif Config.FLASK_ENV == "development":
-        return "config.DevelopmentConfig"
-    else:
+    elif Config.FLASK_ENV == "production":
         return "config.ProductionConfig"
+    else:
+        return "config.DevelopmentConfig"
 
 
 def create_app() -> flask_app:
