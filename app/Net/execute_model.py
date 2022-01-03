@@ -1,13 +1,11 @@
-from . import Net
+from .Net import Net
 
-
-
-def execute_model() -> float:
+def execute_model():
 
     net = Net(
-        train_path="Net/image_set/train", 
-        test_path="Net/image_set/test", 
-        valid_path="Net/image_set/validator"
+        train_path="app/Net/image_set/train", 
+        test_path="app/Net/image_set/test", 
+        valid_path="app/Net/image_set/validator"
         )
     
     train_generator, test_generator, valid_generator = net.load_image_set()

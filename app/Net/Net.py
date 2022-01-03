@@ -8,7 +8,7 @@ from tensorflow.keras import (
     optimizers
 )
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.kerars.layers import (
+from tensorflow.keras.layers import (
     Dense,
     Conv2D,
     Flatten,
@@ -39,7 +39,7 @@ class Net:
         self.train_path = train_path
         self.test_path = test_path
         self.valid_path = valid_path
-        self.weights = "Net/.bacteria_trained.hdf5"
+        self.weights = "app/Net/.bacteria_trained.hdf5"
     
     def load_image_set(self) -> Tuple[Any, Any, Any]:
 
@@ -162,10 +162,18 @@ class Net:
         model.add(Flatten())
         model.add(Dense(3, activation="softmax"))
 
+
+        # compiling
+
+        model.compile(loss="categorical_crossentropy", 
+              optimizer=optimizers.Adam(), 
+              metrics=["accuracy"])
+
+        checkpoint = ModelCheckpoint("app/Net/.bacteria_trained.hdf5", monitor="accuracy", verbose=1, save_best_only=True)
         if os.path.exists(self.weights):
             model.load_weights(self.weights)
         else:
-            checkpoint = ModelCheckpoint(".bacteria_trained.hdf5", monitor="accuracy", verbose=1, save_best_only=True)
+            
             model.fit(train_generator, 
                  steps_per_epoch=531//32, 
                  epochs=500, 

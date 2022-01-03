@@ -1,7 +1,7 @@
 
 from flask import jsonify
 import flask
-from Net.execute_model import execute_model
+from .Net.execute_model import execute_model
 
 
 def create_routes(app: flask.app.Flask) -> None:
