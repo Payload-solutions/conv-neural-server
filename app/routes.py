@@ -11,6 +11,10 @@ def create_routes(app: flask.app.Flask) -> None:
             {"message": "Hello world"}
         )
     
+    @app.route("/model")
+    def train():
+        pass
+    
     @app.route("/gallery")
     def gallery_images():
         return jsonify({
