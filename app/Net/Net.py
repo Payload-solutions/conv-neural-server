@@ -39,8 +39,11 @@ class Net:
         self.train_path = train_path
         self.test_path = test_path
         self.valid_path = valid_path
-        self.weights = "app/Net/.bacteria_trained.hdf5"
-    
+        try:
+            self.weights = "app/Net/.bacteria_trained.hdf5"
+        except:
+            pass
+
     def load_image_set(self) -> Tuple[Any, Any, Any]:
 
         train_gen = ImageDataGenerator(
