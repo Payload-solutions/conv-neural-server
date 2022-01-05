@@ -20,6 +20,4 @@ EXPOSE 5000
 
 COPY . .
 
-RUN pwd
-
 CMD ["flask", "run"]

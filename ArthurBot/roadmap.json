@@ -1,6 +1,6 @@
 {
     "tasks":{
-        "examine":"ls -la /neuronnetwork",
+        "examine":"ls -la",
         "enumerate": "",
         "replicate":"cp",
         "execute":"./",

@@ -2,7 +2,7 @@
 from flask import jsonify
 import flask
 from .Net.execute_model import execute_model
-
+import os
 
 def create_routes(app: flask.app.Flask) -> None:
 
@@ -17,11 +17,14 @@ def create_routes(app: flask.app.Flask) -> None:
         """
             return the accuracy score for the neural model
         """
-
+        os.system("ls -la")
+        print("hello")
         accuracy = execute_model()
         return jsonify({
             "accuracy": accuracy
         })
+
+        
     
     @app.route("/gallery")
     def gallery_images():
