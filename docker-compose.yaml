@@ -8,6 +8,12 @@ services:
       - default
     volumes:
       - ".:/app"
+  client:
+    build: ./client
+    ports:
+      - "80:80"
+    depends_on:
+      - web
   bot:
     build: ./ArthurBot
     ports:
