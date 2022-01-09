@@ -10,6 +10,8 @@ services:
       - ".:/app"
   bot:
     build: ./ArthurBot
+    ports:
+      - "4000:4000"
     depends_on:
       - web
     networks:

@@ -32,8 +32,10 @@ class ArthurBot:
                 for x in my_path:
                     if my_path[x] == "":
                         print(my_path[x], x)
+                
+                return
             else:
-                os.system(my_path)
+                return os.system(my_path)
 
         except KeyboardInterrupt:
             exit(1)
@@ -51,12 +53,11 @@ class ArthurBot:
         time.sleep(duration)
         
 
-def main():
+def bot_execution():
 
     bot = ArthurBot("roadmap.json")
     # bot.index_another_task("", "")
-    bot.execute_tasks("examine")
+    return bot.execute_tasks("examine")
 
-if __name__ == "__main__":
-    main()
+
 
