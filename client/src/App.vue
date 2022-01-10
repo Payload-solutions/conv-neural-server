@@ -2,7 +2,7 @@
   <div id="app">
     <b-navbar toggleable="md" type="dark" variant="dark">
       <b-container>
-        <b-navbar-brand href="#">Measurements</b-navbar-brand>
+        <b-navbar-brand>Measurements</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -10,6 +10,7 @@
           <b-navbar-nav>
             <!-- <b-nav-item :to="{name: 'realtime'}">Real time</b-nav-item> -->
             <b-nav-item :to="{name: 'home'}">Home</b-nav-item>
+            <b-nav-item :to="{name: 'image-train'}">Entrenamiento</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-container>
