@@ -11,7 +11,7 @@
             <form>
               <div class="mb-3">
                 <label for="formFileSm" class="form-label"
-                  >Small file input example</label
+                  >sube una imagen para probar el entrenamiento</label
                 >
                 <input
                   class="form-control form-control-sm"
@@ -24,7 +24,6 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4"></div>
     </div>
   </div>
 </template>

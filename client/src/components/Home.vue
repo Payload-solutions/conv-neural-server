@@ -6,7 +6,7 @@
       <div class="col-md-3">
 
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="card">
           <div class="card-header">
               <h5 class="card-title">¿Qué es una Red Convolucional?</h5>
@@ -15,12 +15,9 @@
             <p class="card-content">
               Una red convolucional, trata de imitar el comportamiento de la corteza cerebral.
             </p>
-            <img src="../assets/conv-full-layer.gif" alt="">
+            <img src="../assets/conv-full-layer.gif" class="img-fluid" alt="">
           </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        
       </div>
     </div>
   </div>
