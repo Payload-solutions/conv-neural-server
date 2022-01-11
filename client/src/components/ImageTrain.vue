@@ -19,7 +19,7 @@
                   type="file"
                 />
               </div>
-              <button type="submit" class="btn btn-outline-secondary">Submit</button>
+              <button type="submit" class="btn btn-outline-secondary"><img src="../assets/arrow.png" alt=""> probar</button>
             </form>
           </div>
         </div>
@@ -31,5 +31,6 @@
 <style>
 .image-train {
   padding-top: 30px;
+  margin-right: 30px;
 }
 </style>
