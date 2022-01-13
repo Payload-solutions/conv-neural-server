@@ -17,7 +17,7 @@ const routes = [
     },
     {
         path:'/planet',
-        component:() => import(/* webpackChunkName: "about" */ '../components/PlanetChart.vue'),
+        component:() => import(/* webpackChunkName: "about" */ '../components/RandomChart.vue'),
         name: "planet"
     }
 ]
