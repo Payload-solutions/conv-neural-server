@@ -3,6 +3,8 @@ from flask import jsonify
 import flask
 from .Net.execute_model import execute_model
 import os
+import pickle
+
 
 def create_routes(app: flask.app.Flask) -> None:
 
@@ -17,19 +19,24 @@ def create_routes(app: flask.app.Flask) -> None:
         """
             return the accuracy score for the neural model
         """
-        os.system("ls -la")
-        print("hello")
+        # os.system("ls -la")
+        print([os.popen("ls -la")])
         accuracy = execute_model()
         return jsonify({
-            "accuracy": accuracy
+            "accuracy": accuracy,
+            "dir":""         
         })
 
         
     
-    @app.route("/gallery")
+    @app.route("/chart-values")
     def gallery_images():
+        
+        with open("history_dict", "rb") as file:
+            values = pickle.load(file)
+
         return jsonify({
-            "message": "This is the route images"
+            "message": values
         })
     
     @app.route("/about-model")

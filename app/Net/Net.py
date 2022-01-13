@@ -21,6 +21,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.callbacks import ModelCheckpoint
 
 # other utilities
+import pickle
 import sys
 import os
 from typing import (
@@ -86,6 +87,12 @@ class Net:
 
         return train_generator, test_generator, valid_generator
     
+    
+    def save_history_vals(self, history: Any) -> None:
+        with open("app/Net/.history_dict", "wb") as file:
+            pickle.dump(file)
+
+
     def neural_model(self, train_generator: Any, valid_generator: Any)-> Any:
 
         model = Sequential()
