@@ -1,0 +1,1 @@
+enviar un correo electrónico al realizarce una transacción,  (pedido de venta al cliente, despacho de mercadería, ralización de factura al cliente)
