@@ -2,6 +2,7 @@
 from flask import jsonify
 import flask
 from .Net.execute_model import execute_model
+from .Net.utils import performing_values
 import os
 import pickle
 
@@ -41,6 +42,8 @@ def create_routes(app: flask.app.Flask) -> None:
     
     @app.route("/about-model")
     def about_model():
-        return jsonify({
-            "message": "This section gonna show the content of the model"
-        })
+        # values = performing_values()
+        return jsonify(performing_values())
+
+
+

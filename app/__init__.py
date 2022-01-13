@@ -3,7 +3,7 @@ import flask
 from flask import Flask
 from config import Config
 import os
-
+from flask_cors import CORS
 # local imports
 from .errors import create_error_handler
 from .routes import create_routes
@@ -28,6 +28,7 @@ def create_app() -> flask_app:
 
     # getting the config environment
     CONFIG_TYPE = get_environment_config()
+    CORS(app, support_credentials=True)
     app.config.from_object(CONFIG_TYPE)
 
     # initializing routes and error handlers
