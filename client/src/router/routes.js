@@ -7,23 +7,27 @@ Vue.use(VueRouter)
 const routes = [
     {
         path:'/',
-        component:() => import(/* webpackChunkName: "about" */ '../components/Home.vue'),
+        component:() => import('../views/Home.vue'),
         name: "home"
     },
     {
         path:'/image-train',
-        component:() => import(/* webpackChunkName: "about" */ '../components/ImageTrain.vue'),
+        component:() => import('../components/ImageTrain.vue'),
         name: "image-train"
     },
     {
         path:'/planet',
-        component:() => import(/* webpackChunkName: "about" */ '../components/RandomChart.vue'),
+        component:() => import('../components/PlanetChart.vue'),
         name: "planet"
     },
     {
         path:'/stats',
-        component:() => import(/* webpackChunkName: "about" */ '../components/Statistics.vue'),
+        component:() => import('../components/Statistics.vue'),
         name: "stats"
+    },
+    {
+        path:'*',
+        component: ()=> import('../views/NotFound.vue')
     }
 ]
 
