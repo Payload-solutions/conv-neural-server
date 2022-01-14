@@ -26,9 +26,9 @@ def create_app() -> flask_app:
 
     app = Flask(__name__)
 
+    CORS(app, resources={r'/*': {'origins':'*'}})
     # getting the config environment
     CONFIG_TYPE = get_environment_config()
-    CORS(app, support_credentials=True)
     app.config.from_object(CONFIG_TYPE)
 
     # initializing routes and error handlers

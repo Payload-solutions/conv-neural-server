@@ -1,5 +1,8 @@
 
-from flask import jsonify
+from flask import (
+    jsonify,
+    request
+)
 import flask
 from .Net.execute_model import execute_model
 from .Net.utils import performing_values
@@ -40,10 +43,12 @@ def create_routes(app: flask.app.Flask) -> None:
             "message": values
         })
     
-    @app.route("/about-model")
+    @app.route("/about-model", methods=['GET'])
     def about_model():
-        # values = performing_values()
-        return jsonify(performing_values())
+
+        if request.method == "GET":
+            # values = performing_values()
+            return jsonify(performing_values())
 
 
 

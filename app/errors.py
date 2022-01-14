@@ -1,7 +1,6 @@
 
 import flask
 from flask import jsonify
-# from . import app
 
 
 def create_error_handler(app: flask.app.Flask) -> None:

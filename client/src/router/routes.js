@@ -19,6 +19,11 @@ const routes = [
         path:'/planet',
         component:() => import(/* webpackChunkName: "about" */ '../components/RandomChart.vue'),
         name: "planet"
+    },
+    {
+        path:'/stats',
+        component:() => import(/* webpackChunkName: "about" */ '../components/Statistics.vue'),
+        name: "stats"
     }
 ]
 

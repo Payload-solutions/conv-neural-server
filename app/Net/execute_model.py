@@ -15,10 +15,4 @@ def execute_model():
     model = net.neural_model(train_generator, valid_generator)
     pprint(model.history)
 
-    # dict_path = "history_dict"
-
-    # with open(dict_path, "rb") as file:
-    #    elements = pickle.load(file)
-
-    # pprint(elements)
     return model.evaluate(test_generator)[1]
