@@ -1,34 +1,29 @@
 <template>
     <div class="statistics">
-
+        <canvas id="statistics-vals-data"></canvas>
     </div>
 </template>
 
 <script>
+    import Chart from 'chart.js';
+    import StatisticsValuesData from '../services/StatisticsValues.js';
     import axios from 'axios';
-    export default{
-        name:"Statistic",
-        props: ["statistic"],
-        data (){
-            return {
-                values: {}
-            }
-        },
-        created(){
-            this.loadHistory();
-        },
-        methods:{
-            loadHistory(){
 
-                axios.get("http://127.0.0.1:5000/about-model")
-                    .then((res) => {
-                        this.values = res.data;
-                        console.log(this.values);
-                    })
-                    .catch((error)=>{
-                        console.log(error);
-                    })
-            }
+    export default{
+    name: "Statistics",
+    props:["statistics"],
+    data(){
+        return {
+            StatisticsValuesData:StatisticsValuesData
+        }
+    },
+    mounted(){
+        const ctx = document.getElementById('statistics-vals-data');
+        new Chart(ctx, this.StatisticsValuesData);
+    },methods:{
+        loadAndFill(){
+            axios.get("http://localhost:5000/chart-values")
         }
     }
+}
 </script>

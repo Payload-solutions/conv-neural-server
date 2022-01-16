@@ -8,6 +8,8 @@ from .Net.execute_model import execute_model
 from .Net.utils import performing_values
 import os
 import pickle
+from pprint import pprint
+
 
 
 def create_routes(app: flask.app.Flask) -> None:
@@ -32,13 +34,12 @@ def create_routes(app: flask.app.Flask) -> None:
         })
 
         
-    
-    @app.route("/chart-values")
+    @app.route("/chart-values", methods=["GET"])
     def gallery_images():
         
         with open("history_dict", "rb") as file:
             values = pickle.load(file)
-
+        pprint(values)
         return jsonify({
             "message": values
         })
@@ -49,6 +50,14 @@ def create_routes(app: flask.app.Flask) -> None:
         if request.method == "GET":
             # values = performing_values()
             return jsonify(performing_values())
+
+    
+    @app.route("/train", methods=["POST"])
+    def init_training():
+        if request.method == "POST":
+            print(dir(request))
+
+
 
 
 

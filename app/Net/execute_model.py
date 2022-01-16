@@ -16,3 +16,7 @@ def execute_model():
     pprint(model.history)
 
     return model.evaluate(test_generator)[1]
+
+
+def test_post_image():
+    pass
