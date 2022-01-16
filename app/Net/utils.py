@@ -30,9 +30,20 @@ def performing_values() -> features_type:
 
 def accuracy_loss_handler() -> history_type:
     
-
     with open("history_dict", "rb") as file:
-        values = pickle.load(file)
+        values: dict = pickle.load(file)
+    
+    dataset: history_type = [
+        {"index":i+1,
+        "accuracy":a,
+        "loss":b,
+        "val_loss":c,
+        "val_accuracy":d} for i, (a. b, c, d) in enumerate(zip(
+            values["accuracy"], values["loss"], values["val_loss"], values["val_accuracy"] 
+        ))
+    ]
+    return dataset
+    
 
     
     

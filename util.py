@@ -10,18 +10,20 @@ def handling():
     with open("history_dict", "rb") as file:
         values: dict = pickle.load(file)
     
-    # dataset = [
-    #     {"accuracy": "", 
-    #     "val_accuracy":"", 
-    #     "loss":"", 
-    #     "val_loss":""} for  ]
+    dataset = [
+        {
+            "index":i+1,
+            "accuracy": b, 
+            "val_accuracy":d, 
+            "loss": a, 
+            "val_loss":c} for i, (a, b, c, d) in enumerate(zip(
+                values["loss"],
+                values["accuracy"],
+                values["val_loss"],
+                values["val_accuracy"]
+        ))
+    ]
 
-    for key, val in values.items():
-        for i, x in enumerate(val):
-            print(key, i, x)
-            
-            
-            if i == 2:
-                break
+    pprint(dataset)
 
 handling()

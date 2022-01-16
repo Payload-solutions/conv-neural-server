@@ -5,7 +5,10 @@ from flask import (
 )
 import flask
 from .Net.execute_model import execute_model
-from .Net.utils import performing_values
+from .Net.utils import (
+    performing_values,
+    accuracy_loss_handler
+)
 import os
 import pickle
 from pprint import pprint
@@ -36,12 +39,9 @@ def create_routes(app: flask.app.Flask) -> None:
         
     @app.route("/chart-values", methods=["GET"])
     def gallery_images():
-        
-        with open("history_dict", "rb") as file:
-            values = pickle.load(file)
-        pprint(values)
+
         return jsonify({
-            "message": values
+            "message": accuracy_loss_handler()
         })
     
     @app.route("/about-model", methods=['GET'])
