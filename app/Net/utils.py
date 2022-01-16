@@ -28,4 +28,11 @@ def performing_values() -> features_type:
     }
 
 
-def accuracy_loss_handler() -> List[]:
+def accuracy_loss_handler() -> history_type:
+    
+
+    with open("history_dict", "rb") as file:
+        values = pickle.load(file)
+
+    
+    
