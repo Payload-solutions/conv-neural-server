@@ -8,14 +8,15 @@
             <h5 class="card-title">Prueba de convolución</h5>
           </div>
           <div class="card-body">
-            <form>
+            <form @submit.prevent="sendImage">
               <div class="mb-3">
                 <label for="formFileSm" class="form-label"
                   >sube una imagen para probar el entrenamiento</label
                 >
                 <input
                   class="form-control form-control-sm"
-                  id="formFileSm"
+                  name="formImageFiles"
+                  @change="onChange"
                   type="file"
                 />
               </div>
@@ -63,6 +64,7 @@ export default {
   data() {
     return {
       values: [],
+      imageData: null,
     };
   },
   created() {
@@ -77,6 +79,23 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+        });
+    },
+    onChange(event) {
+      this.imageData = event.target.files[0];
+    },
+    sendImage() {
+      const formData = new FormData();
+      formData.append("formImageFiles", this.imageData, this.imageData.name);
+      axios
+        .post("http://localhost:5000/train", formData, {
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response);
         });
     },
   },

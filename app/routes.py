@@ -12,7 +12,7 @@ from .Net.utils import (
 import os
 import pickle
 from pprint import pprint
-
+from flask_cors import cross_origin
 
 
 def create_routes(app: flask.app.Flask) -> None:
@@ -53,11 +53,17 @@ def create_routes(app: flask.app.Flask) -> None:
 
     
     @app.route("/train", methods=["POST"])
+    @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
     def init_training():
-        if request.method == "POST":
-            print(dir(request))
-
-
+        try:
+            request.files.get('formImageFiles')
+            return jsonify({
+                "message":"hello"
+            })
+        except Exception  as e:
+            return jsonify({
+                "Error": f"{str(e)}"
+            })
 
 
 

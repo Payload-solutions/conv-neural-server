@@ -16,11 +16,6 @@ const routes = [
         name: "image-train"
     },
     {
-        path:'/planet',
-        component:() => import('../components/PlanetChart.vue'),
-        name: "planet"
-    },
-    {
         path:'/stats',
         component:() => import('../components/Statistics.vue'),
         name: "stats"

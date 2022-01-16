@@ -1,24 +1,47 @@
+import axios from "axios";
 
-import fetchStatisticsData from '../utils/fetchStatisticsData.js';
 
-console.log("fetch", fetchStatisticsData.data().dataLabels);
+let accuracy = [];
+let valAccuracy = [];
+let loss = [];
+let valLoss = [];
+let dataFetched = [];
+let dataLabels = [];
+
+axios
+  .get("http://localhost:5000/chart-values")
+  .then((res) => {
+    dataFetched = res.data.message;
+    
+    dataFetched.forEach(element => {
+      dataLabels.push(element["index"]);
+      accuracy.push(element["accuracy"]);
+      valAccuracy.push(element["val_accuracy"]);
+      loss.push(element["loss"]);
+      valLoss.push(element["val_loss"]);
+    });
+
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 export const StatisticsValuesData = {
   type: "line",
   data: {
-    labels: fetchStatisticsData.data().dataLabels,
+    labels: dataLabels,
     datasets: [
       {
         label: "accuracy",
-        data: fetchStatisticsData.data().dataLabels,
-        backgroundColor: "rgba(54,73,93,.5)",
+        data: accuracy,
+        backgroundColor: "rgba(236, 250, 242, 0.83)",
         borderColor: "#36495d",
         borderWidth: 3,
       },
       {
-        label: "loss",
-        data: fetchStatisticsData.data().dataLabels,
-        backgroundColor: "rgba(71, 183,132,.5)",
+        label: "valAccuracy",
+        data: valAccuracy,
+        backgroundColor: "rgba(16, 24, 19, 0.83)",
         borderColor: "#47b784",
         borderWidth: 3,
       },

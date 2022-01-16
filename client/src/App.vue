@@ -2,15 +2,14 @@
   <div id="app">
     <b-navbar toggleable="md" type="dark" variant="dark">
       <b-container>
-        <b-navbar-brand><img src="./assets/yogurt1.png" alt=""/>  Yogur-vision</b-navbar-brand>
+        <b-navbar-brand :to="{name: 'home'}"><img src="./assets/yogurt1.png" alt=""/>  Yogur-vision</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item :to="{name: 'image-train'}">entrenamiento</b-nav-item>
-            <b-nav-item :to="{name: 'home'}">info</b-nav-item>
-            <b-nav-item :to="{name: 'planet'}">planet</b-nav-item>
+            <!-- <b-nav-item :to="{name: 'home'}">info</b-nav-item> -->
             <b-nav-item :to="{name: 'stats'}">stats</b-nav-item>
           </b-navbar-nav>
         </b-collapse>

@@ -9,7 +9,12 @@ convolution and return the value of the query
 with the result"""
 
 import os
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import (
+    ImageDataGenerator,
+    load_img,
+    img_to_array,
+    array_to_image
+)
 from typing import Any
 
 

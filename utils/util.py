@@ -16,7 +16,7 @@ def handling():
             "accuracy": b, 
             "val_accuracy":d, 
             "loss": a, 
-            "val_loss":c} for i, (a, b, c, d) in enumerate(zip(
+            "val_loss":c } for i, (a, b, c, d) in enumerate(zip(
                 values["loss"],
                 values["accuracy"],
                 values["val_loss"],
@@ -24,6 +24,4 @@ def handling():
         ))
     ]
 
-    pprint(dataset)
-
-handling()
+    return dataset
