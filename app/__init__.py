@@ -15,7 +15,7 @@ flask_app = flask.app.Flask
 
 def get_environment_config():
     if Config.FLASK_ENV == "testing":
-        return "config.TestConfig"
+        return "config.TestingConfig"
     elif Config.FLASK_ENV == "production":
         return "config.ProductionConfig"
     else:
@@ -36,3 +36,4 @@ def create_app() -> flask_app:
     create_error_handler(app)
     return app
 
+app = create_app()

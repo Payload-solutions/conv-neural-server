@@ -12,9 +12,15 @@ import os
 import pickle
 from pprint import pprint
 from flask_cors import cross_origin
-
+import unittest
 
 def create_routes(app: flask.app.Flask) -> None:
+
+    @app.cli.command()
+    def test():
+        test = unittest.TestLoader().discover("tests")
+        unittest.TextTestRunner().run(test)
+
     @app.route("/")
     def index():
         return jsonify(
@@ -33,6 +39,7 @@ def create_routes(app: flask.app.Flask) -> None:
             "accuracy": accuracy,
             "dir": ""
         })
+    
 
     @app.route("/chart-values", methods=["GET"])
     def gallery_images():
