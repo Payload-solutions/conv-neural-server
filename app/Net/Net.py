@@ -32,11 +32,11 @@ from typing import (
 
 class Net:
 
-    def __init__(self, 
-        train_path: str, 
-        test_path: str, 
-        valid_path: str):
-        
+    def __init__(self,
+                 train_path: str,
+                 test_path: str,
+                 valid_path: str):
+
         self.train_path = train_path
         self.test_path = test_path
         self.valid_path = valid_path
@@ -86,14 +86,12 @@ class Net:
         )
 
         return train_generator, test_generator, valid_generator
-    
-    
-    def save_history_vals(self, history: Any) -> None:
+
+    def save_history_values(self, history: Any) -> None:
         with open("app/Net/.history_dict", "wb") as file:
             pickle.dump(file)
 
-
-    def neural_model(self, train_generator: Any, valid_generator: Any)-> Any:
+    def neural_model(self, train_generator: Any, valid_generator: Any) -> Any:
 
         model = Sequential()
 
@@ -172,28 +170,22 @@ class Net:
         model.add(Flatten())
         model.add(Dense(3, activation="softmax"))
 
-
         # compiling
 
-        model.compile(loss="categorical_crossentropy", 
-              optimizer=optimizers.Adam(), 
-              metrics=["accuracy"])
+        model.compile(loss="categorical_crossentropy",
+                      optimizer=optimizers.Adam(),
+                      metrics=["accuracy"])
 
-        checkpoint = ModelCheckpoint("app/Net/.bacteria_trained.hdf5", monitor="accuracy", verbose=1, save_best_only=True)
+        checkpoint = ModelCheckpoint("app/Net/.bacteria_trained.hdf5", monitor="accuracy",
+                                     verbose=1, save_best_only=True)
         if os.path.exists(self.weights):
             model.load_weights(self.weights)
         else:
-            
-            model.fit(train_generator, 
-                 steps_per_epoch=531//32, 
-                 epochs=500, 
-                 validation_data=valid_generator,
-                 validation_steps=76//32,
-                 callbacks=[checkpoint])
+
+            model.fit(train_generator,
+                      steps_per_epoch=531//32,
+                      epochs=500,
+                      validation_data=valid_generator,
+                      validation_steps=76//32,
+                      callbacks=[checkpoint])
         return model
-    
-
-
-    
-        
-

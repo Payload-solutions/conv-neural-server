@@ -1,4 +1,3 @@
-
 from flask import (
     jsonify,
     request
@@ -16,13 +15,12 @@ from flask_cors import cross_origin
 
 
 def create_routes(app: flask.app.Flask) -> None:
-
     @app.route("/")
     def index():
         return jsonify(
             {"message": "Hello world"}
         )
-    
+
     @app.route("/model")
     def train():
         """
@@ -33,17 +31,16 @@ def create_routes(app: flask.app.Flask) -> None:
         accuracy = execute_model()
         return jsonify({
             "accuracy": accuracy,
-            "dir":""         
+            "dir": ""
         })
 
-        
     @app.route("/chart-values", methods=["GET"])
     def gallery_images():
 
         return jsonify({
             "message": accuracy_loss_handler()
         })
-    
+
     @app.route("/about-model", methods=['GET'])
     def about_model():
 
@@ -51,19 +48,15 @@ def create_routes(app: flask.app.Flask) -> None:
             # values = performing_values()
             return jsonify(performing_values())
 
-    
     @app.route("/train", methods=["POST"])
-    @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+    @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
     def init_training():
         try:
             request.files.get('formImageFiles')
             return jsonify({
-                "message":"hello"
+                "message": "hello"
             })
-        except Exception  as e:
+        except Exception as e:
             return jsonify({
                 "Error": f"{str(e)}"
             })
-
-
-
