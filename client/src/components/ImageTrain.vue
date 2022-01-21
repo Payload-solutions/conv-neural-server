@@ -73,7 +73,7 @@ export default {
   methods: {
     loadHistory() {
       axios
-        .get("http://127.0.0.1:5000/about-model")
+        .get("http://127.0.0.1:5000/about_model")
         .then((res) => {
           this.values.push(res.data);
         })
