@@ -41,7 +41,8 @@ class Net:
         self.test_path = test_path
         self.valid_path = valid_path
         try:
-            self.weights = "app/Net/.bacteria_trained.hdf5"
+            # self.weights = "app/Net/.bacteria_trained.hdf5"
+            self.weights = "lib/neural_weights_test.hdf5"
         except:
             pass
 

@@ -3,16 +3,23 @@ from flask import (
     request
 )
 import flask
-from .Net.execute_model import execute_model
+from .Net.execute_model import (
+    execute_model,
+    test_post_image
+    )
 from .Net.utils import (
     performing_values,
-    accuracy_loss_handler
+    accuracy_loss_handler,
+    process_image
 )
-import os
+from .handlers import allowed_files
 import pickle
-from pprint import pprint
 from flask_cors import cross_origin
+from werkzeug.utils import secure_filename
 import unittest
+import os
+
+
 
 def create_routes(app: flask.app.Flask) -> None:
 
@@ -20,50 +27,49 @@ def create_routes(app: flask.app.Flask) -> None:
     def test():
         test = unittest.TestLoader().discover("tests")
         unittest.TextTestRunner().run(test)
-
-    @app.route("/")
-    def index():
-        return jsonify(
-            {"message": "Hello world"}
-        )
-
-    @app.route("/model")
-    def train():
-        """
-            return the accuracy score for the neural model
-        """
-        # os.system("ls -la")
-        print([os.popen("ls -la")])
-        accuracy = execute_model()
-        return jsonify({
-            "accuracy": accuracy,
-            "dir": ""
-        })
     
 
-    @app.route("/chart-values", methods=["GET"])
-    def gallery_images():
-
+    @app.route("/history_values", methods=["GET"])
+    def history_values():
         return jsonify({
             "message": accuracy_loss_handler()
         })
 
-    @app.route("/about-model", methods=['GET'])
+    @app.route("/about_model", methods=["GET"])
     def about_model():
-
-        if request.method == "GET":
-            # values = performing_values()
-            return jsonify(performing_values())
+        """
+        Getting all the values saved making the neural
+        training and saving in json files
+        """
+        return jsonify(performing_values())
 
     @app.route("/train", methods=["POST"])
     @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
-    def init_training():
-        try:
-            request.files.get('formImageFiles')
-            return jsonify({
-                "message": "hello"
-            })
-        except Exception as e:
-            return jsonify({
-                "Error": f"{str(e)}"
-            })
+    def train():
+        # try:
+        #     files = request.files.get('formImageFiles')
+        #     filename = secure_filename(files.filename)
+        #     try:
+        #         if not allowed_files(filename):
+        #             return jsonify({
+        #                 "type": "ERROR",
+        #                 "message": "The file type allowed should be in png or jpg"
+        #             })
+        #         files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        #         # eval_generator = process_image(filename)
+        #         # print(test_post_image(eval_generator))
+        #         return jsonify({
+        #             "message": "hello"
+        #         })
+        #     except Exception as e:
+        #         print(f"Error by {str(e)}")
+        #         return jsonify({
+        #             "message": f"Error by {str(e)}"
+        #         })
+        # except Exception as e:
+        #     print(f"Error by {str(e)}")
+        #     return jsonify({
+        #         "Error": f"{str(e)}"
+        #     })
+        return jsonify({"Error":"This is the error"})

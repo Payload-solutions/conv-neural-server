@@ -8,7 +8,6 @@ from flask_cors import CORS
 from .errors import create_error_handler
 from .routes import create_routes
 
-
 # custom variables
 flask_app = flask.app.Flask
 
@@ -29,7 +28,9 @@ def create_app() -> flask_app:
     CORS(app, resources={r'/*': {'origins':'*'}})
     # getting the config environment
     CONFIG_TYPE = get_environment_config()
+    UPLOAD_FOLDER = 'temp/image/'
     app.config.from_object(CONFIG_TYPE)
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     # initializing routes and error handlers
     create_routes(app)
