@@ -4,7 +4,8 @@ from flask import (
     current_app,
     url_for
 )
-
+from io import StringIO
+from PIL import Image
 
 class MainTest(TestCase):
 
@@ -20,10 +21,6 @@ class MainTest(TestCase):
     def test_app_in_test_mode(self):
         self.assertTrue(current_app.config["TESTING"])
     
-    # def test_train_get(self):
-    #     response = self.client.get(url_for("train"))
-    #     self.assert200(response)
-    
     def test_hsitory_values_get(self):
         response = self.client.get(url_for("history_values"))
         self.assert200(response)
@@ -31,3 +28,13 @@ class MainTest(TestCase):
     def test_about_model_get(self):
         response = self.client.get(url_for("about_model"))
         self.assert200(response)
+    
+    def test_train_post(self):
+        image = Image.open("temp/image/hola.png")
+        response = self.client.post(url_for("train"), 
+            data={
+                "formImageFiles": (image, 'hola.png')
+            })
+        
+        self.assertEquals(response.status, "200 OK")
+

@@ -4,7 +4,8 @@ from flask import (
 )
 import flask
 from .Net.execute_model import (
-    execute_model
+    execute_model,
+    test_post_image
     )
 from .Net.utils import (
     performing_values,
@@ -57,6 +58,7 @@ def create_routes(app: flask.app.Flask) -> None:
         try:
             files = request.files.get('formImageFiles')
             filename = secure_filename(files.filename)
+
             try:
                 if not allowed_files(filename):
                     return jsonify({
@@ -64,12 +66,12 @@ def create_routes(app: flask.app.Flask) -> None:
                         "message": "The file type allowed should be in png or jpg"
                     })
                 files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-                # eval_generator = process_image(filename)
-                # print(test_post_image(eval_generator))
-                print("ok")
+                low, non, reg = test_post_image(f"temp/image/{filename}")
+                print(low, non, reg)
                 return jsonify({
-                    "message": "hello"
+                    "type":"SUCCESS",
+                    "message": "hello",
+                    "result":"this gonna be the resoult of the prediction"
                 })
             except Exception as e:
                 print(f"Error by {str(e)}")

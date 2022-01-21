@@ -177,7 +177,7 @@ class Net:
                       optimizer=optimizers.Adam(),
                       metrics=["accuracy"])
 
-        checkpoint = ModelCheckpoint("app/Net/.bacteria_trained.hdf5", monitor="accuracy",
+        checkpoint = ModelCheckpoint("lib/.bacteria_trained_new_model.hdf5", monitor="accuracy",
                                      verbose=1, save_best_only=True)
         if os.path.exists(self.weights):
             model.load_weights(self.weights)
