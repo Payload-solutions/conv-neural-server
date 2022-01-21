@@ -4,13 +4,11 @@ from flask import (
 )
 import flask
 from .Net.execute_model import (
-    execute_model,
-    test_post_image
+    execute_model
     )
 from .Net.utils import (
     performing_values,
-    accuracy_loss_handler,
-    process_image
+    accuracy_loss_handler
 )
 from .handlers import allowed_files
 import pickle
@@ -19,6 +17,16 @@ from werkzeug.utils import secure_filename
 import unittest
 import os
 
+
+
+def allowed_files(filename: str):
+    ALLOWED_EXTENSIONS = {
+        'png',
+        'jpg'
+    }
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower()\
+            in ALLOWED_EXTENSIONS
 
 
 def create_routes(app: flask.app.Flask) -> None:
@@ -46,30 +54,30 @@ def create_routes(app: flask.app.Flask) -> None:
     @app.route("/train", methods=["POST"])
     @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
     def train():
-        # try:
-        #     files = request.files.get('formImageFiles')
-        #     filename = secure_filename(files.filename)
-        #     try:
-        #         if not allowed_files(filename):
-        #             return jsonify({
-        #                 "type": "ERROR",
-        #                 "message": "The file type allowed should be in png or jpg"
-        #             })
-        #         files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        try:
+            files = request.files.get('formImageFiles')
+            filename = secure_filename(files.filename)
+            try:
+                if not allowed_files(filename):
+                    return jsonify({
+                        "type": "ERROR",
+                        "message": "The file type allowed should be in png or jpg"
+                    })
+                files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        #         # eval_generator = process_image(filename)
-        #         # print(test_post_image(eval_generator))
-        #         return jsonify({
-        #             "message": "hello"
-        #         })
-        #     except Exception as e:
-        #         print(f"Error by {str(e)}")
-        #         return jsonify({
-        #             "message": f"Error by {str(e)}"
-        #         })
-        # except Exception as e:
-        #     print(f"Error by {str(e)}")
-        #     return jsonify({
-        #         "Error": f"{str(e)}"
-        #     })
-        return jsonify({"Error":"This is the error"})
+                # eval_generator = process_image(filename)
+                # print(test_post_image(eval_generator))
+                print("ok")
+                return jsonify({
+                    "message": "hello"
+                })
+            except Exception as e:
+                print(f"Error by {str(e)}")
+                return jsonify({
+                    "message": f"Error by {str(e)}"
+                })
+        except Exception as e:
+            print(f"Error by {str(e)}")
+            return jsonify({
+                "Error": f"{str(e)}"
+            })

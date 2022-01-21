@@ -11,13 +11,8 @@ import pickle
 import os
 from tensorflow.keras.preprocessing.image import (
     ImageDataGenerator,
-    load_image,
     img_to_array
 )
-# from tensorflow.keras.applications.resnet50 import (
-#     preprocess_input,
-#     decode_predictions
-# )
 from typing import Any
 
 features_type = Dict[str, float]
@@ -38,15 +33,15 @@ def performing_values() -> features_type:
     }
 
 
-def process_image(image):
+# def process_image(image):
 
-    # img = image.load_img(f"tmp/image/{image}", 
-    #     target_size=(64, 64))
-    # img_array = image.img_to_array(img)
-    # img_batch = np.expand_dims(img_array, axis=0)
-    # img_preprocessed = preprocess_input(img_batch)
-    # return img_preprocessed
-    pass
+#     # img = image.load_img(f"tmp/image/{image}", 
+#     #     target_size=(64, 64))
+#     # img_array = image.img_to_array(img)
+#     # img_batch = np.expand_dims(img_array, axis=0)
+#     # img_preprocessed = preprocess_input(img_batch)
+#     # return img_preprocessed
+#     pass
 
 def accuracy_loss_handler() -> history_type:
 
