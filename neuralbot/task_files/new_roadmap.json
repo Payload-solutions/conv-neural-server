@@ -1,0 +1,38 @@
+{
+    "tasks": {
+        "examine": {
+            "enumerate folders": "ls -la",
+            "content": [
+                [
+                    "bot.py",
+                    "new_roadmap.json",
+                    "roadmap.json",
+                    ".git",
+                    "neuron-bot.py",
+                    "backup.json",
+                    "Dockerfile",
+                    "README.md"
+                ]
+            ]
+        },
+        "enumerate": "",
+        "replicate": "cp",
+        "execute": "./",
+        "evaluate": {
+            "description": "virtual assistant for the improving of the neural network accuracy",
+            "command": "python ",
+            "target": ".bacteria_trained.hdf5",
+            "enumerate folders": "ls",
+            "accuracy": "",
+            "content": ""
+        },
+        "testing": {
+            "description": "testing the web application",
+            "command": "python ",
+            "target": ".bacteria_trained.hdf5",
+            "enumerate folders": "ls",
+            "accuracy": "",
+            "content": ""
+        }
+    }
+}

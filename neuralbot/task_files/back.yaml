@@ -1,0 +1,21 @@
+tasks:
+  enumerate: ''
+  evaluate:
+    accuracy: ''
+    command: 'python '
+    content: ''
+    description: virtual assistant for the improving of the neural network accuracy
+    enumerate folders: ls
+    target: .bacteria_trained.hdf5
+  examine:
+    content: ''
+    enumerate folders: ls -la
+  execute: ./
+  replicate: cp
+  testing:
+    accuracy: ''
+    command: 'python '
+    content: ''
+    description: testing the web application
+    enumerate folders: ls
+    target: .bacteria_trained.hdf5

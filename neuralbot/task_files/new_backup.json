@@ -1,0 +1,32 @@
+{
+    "tasks": {
+        "examine": {
+            "command": "ls -l",
+            "target": "file_test_dirs",
+            "description": "enumerate all folder content to get the actual content",
+            "content": "1"
+        },
+        "replicate": {
+            "command": "cp",
+            "target": "",
+            "description": "clone differents files from the director target"
+        },
+        "execute": {
+            "command": "./",
+            "target": "",
+            "description": "run an executable file of the following form: './example.py' "
+        },
+        "evaluate": {
+            "description": "virtual assistant for the improving of the neural network accuracy",
+            "command": "python -c 'import flask;print(flask.__version__)'",
+            "target": ".bacteria_trained.hdf5",
+            "enumerate folders": "ls",
+            "accuracy": ""
+        },
+        "testing": {
+            "description": "testing the web application",
+            "command": "python ",
+            "target": "tests/"
+        }
+    }
+}

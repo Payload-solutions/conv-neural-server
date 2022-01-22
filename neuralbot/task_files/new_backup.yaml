@@ -1,0 +1,24 @@
+tasks:
+    evaluate:
+        accuracy: ''
+        command: 'python '
+        description: virtual assistant for the improving of the neural network accuracy
+        enumerate folders: ls
+        target: .bacteria_trained.hdf5
+    examine:
+        command: ls -l
+        content: '1'
+        description: enumerate all folder content to get the actual content
+        target: file_test_dirs
+    execute:
+        command: ./
+        description: 'run an executable file of the following form: ''./example.py'' '
+        target: ''
+    replicate:
+        command: cp
+        description: clone differents files from the director target
+        target: ''
+    testing:
+        command: 'flask '
+        description: testing the web application
+        target: tests/
