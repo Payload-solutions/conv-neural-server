@@ -1,3 +1,4 @@
 *Pipfile
 *.lock
 __pychache__
+.idea

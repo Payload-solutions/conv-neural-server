@@ -9,7 +9,7 @@ from tensorflow.keras.preprocessing.image import (
     ImageDataGenerator
 )
 from PIL import Image
-from typing import Tuple
+from typing import Tuple, Dict
 
 
 def load_model():
@@ -32,7 +32,7 @@ def execute_model():
     return model.evaluate(test_generator)[1]
 
 
-def test_post_image(image: str) -> Tuple[float, float, float]:
+def test_post_image(image: str) -> Dict[str, str]:
 
     """
     :params:image the file of location of the specific 
@@ -48,5 +48,9 @@ def test_post_image(image: str) -> Tuple[float, float, float]:
     img = img.reshape(1, 64, 64, 3)
 
     prediction = model.predict(img)
-    
-    return prediction[0][0], prediction[0][1], prediction[0][2]
+    prediction[0][0], prediction[0][1], prediction[0][2]
+    return {
+        "low":f"{prediction[0][0]}",
+        "non":f"{prediction[0][1]}",
+        "reg":f"{prediction[0][2]}"
+    }

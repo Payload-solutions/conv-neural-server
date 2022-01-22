@@ -6,18 +6,18 @@ import flask
 from .Net.execute_model import (
     execute_model,
     test_post_image
-    )
+)
 from .Net.utils import (
     performing_values,
     accuracy_loss_handler
 )
+from .handler_messages import response_conv_handler
 from .handlers import allowed_files
 import pickle
 from flask_cors import cross_origin
 from werkzeug.utils import secure_filename
 import unittest
 import os
-
 
 
 def allowed_files(filename: str):
@@ -27,7 +27,7 @@ def allowed_files(filename: str):
     }
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower()\
-            in ALLOWED_EXTENSIONS
+        in ALLOWED_EXTENSIONS
 
 
 def create_routes(app: flask.app.Flask) -> None:
@@ -36,7 +36,6 @@ def create_routes(app: flask.app.Flask) -> None:
     def test():
         test = unittest.TestLoader().discover("tests")
         unittest.TextTestRunner().run(test)
-    
 
     @app.route("/history_values", methods=["GET"])
     def history_values():
@@ -61,25 +60,24 @@ def create_routes(app: flask.app.Flask) -> None:
 
             try:
                 if not allowed_files(filename):
-                    return jsonify({
-                        "type": "ERROR",
-                        "message": "The file type allowed should be in png or jpg"
-                    })
+                    return jsonify(response_conv_handler(
+                        message="Error trying to receive the image",
+                        type="ERROR"))
+
                 files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                low, non, reg = test_post_image(f"temp/image/{filename}")
-                print(low, non, reg)
-                return jsonify({
-                    "type":"SUCCESS",
-                    "message": "hello",
-                    "result":"this gonna be the resoult of the prediction"
-                })
+                content = test_post_image(f"temp/image/{filename}")
+                
+                # return jsonify({
+                #     "non":non,
+                #     "low":low,
+                #     "reg":reg
+                # })
+                return jsonify({"ok":content})
             except Exception as e:
-                print(f"Error by {str(e)}")
-                return jsonify({
-                    "message": f"Error by {str(e)}"
-                })
+                return jsonify(response_conv_handler(
+                    message="Error trying to parse the image",
+                    type="ERROR"))
         except Exception as e:
-            print(f"Error by {str(e)}")
-            return jsonify({
-                "Error": f"{str(e)}"
-            })
+            return jsonify(response_conv_handler(
+                message="Error trying to receive the image",
+                type="ERROR"))
