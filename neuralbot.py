@@ -28,13 +28,16 @@ from pprint import pprint
 import argparse
 import yaml
 
+# # Custom proccess
+# from neuralbot.core.lib.generics import RoadMapFile
+# from neuralbot.core.errors.error_exceptions import *
 
-# Custom proccess
-from core.lib.generics import RoadMapFile
-from core.errors.error_exceptions import *
-from core.tasks.examine import examine
-from core.tasks.evaluate import evaluate
-
+# from neu
+from neuralbot.core.tasks import (
+    testing,
+    examine,
+    evaluate
+)
 
 try:
     import yaml
@@ -155,7 +158,25 @@ class ArthurBot:
             evaluate(self.tasks[task])
         except Exception as e:
             print(f"{str(e)}")
-            exit()
+            exit(1)
+        finally:
+            log.success("evaluations finished, no errors ocurred!")
+
+    def testing_tasks(self):
+
+        
+        # task = self.args.task.lower()
+        try:
+            log.info("Implementing the testing")
+            # testing(self.tasks[task])
+            output = subprocess.check_output("flask test", stderr=subprocess.STDOUT, shell=True)
+            print(output.decode())
+        except Exception as e:
+            # log.warn("Something went wrong!")
+            print(f"{str(e)}")
+            exit(1)
+        finally:
+            log.success("testing finsihed, no errors ocurred!")
 
     def save_roadmap(self,
                      content: Any,
@@ -178,34 +199,40 @@ class ArthurBot:
 def main():
     parser = argparse.ArgumentParser(description='AthurBot, virtual \
             assistant',
-                                     formatter_class=argparse.RawDescriptionHelpFormatter,
-                                     epilog=textwrap.dedent(f"""
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            epilog=textwrap.dedent(f"""
             1) You must make executable the bot => chmod +x neuron-bot.py
 
             2) Here is the content of the possibles task to perform by
                 the bot
-                """))
+    """))
 
-    parser.add_argument('-t', '--task', help='task to do')
+    parser.add_argument('-t', '--task',
+            help='task to do')
     parser.add_argument('-m', '--mode',
-                        help="indicate the mode to the neuron bot")
+            help="indicate the mode to the neuron bot")
 
     parser.add_argument('-l', '--listen', action="store_true",
-                        help="indicate if the bot will be in listen mode or not")
+            help="indicate if the bot will be in listen mode or not")
 
     args = parser.parse_args()
 
 
     try:
-        bot = ArthurBot(path="task_files/roadmap.json",
+        bot = ArthurBot(path="neuralbot/task_files/roadmap.json",
                         args=args)
         
         if args.task == "examine":
             bot.execute_tasks()
+        
         elif args.task == "evaluate":
             bot.evaluate_tasks()
+        
+        elif args.task == "testing":
+            bot.testing_tasks()
+
     except Exception as e:
-        raise Exception()
+        print(e)
         exit(1)
 
 

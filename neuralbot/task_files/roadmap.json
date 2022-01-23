@@ -17,14 +17,14 @@
         },
         "evaluate":{
             "description":"virtual assistant for the improving of the neural network accuracy",
-            "command":"python ",
+            "command":"python -c 'import flask;print(flask.__version__)'",
             "target":".bacteria_trained.hdf5",
             "enumerate folders":"ls",
             "accuracy":""
         },
         "testing":{
-            "description":"testing the web application",
-            "command":"python ",
+            "description":"implement the flask testing ",
+            "command":"flask test",
             "target":"tests/"
         }
     }
