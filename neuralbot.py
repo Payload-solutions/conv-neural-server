@@ -230,6 +230,8 @@ def main():
         
         elif args.task == "testing":
             bot.testing_tasks()
+        
+        # elif args.task == 
 
     except Exception as e:
         print(e)
