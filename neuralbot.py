@@ -165,23 +165,17 @@ class ArthurBot:
     def testing_tasks(self):
 
         
-        # task = self.args.task.lower()
         try:
-            log.info("Implementing the testing")
-            # testing(self.tasks[task])
-            output = subprocess.check_output("flask test", 
-                    stderr=subprocess.STDOUT, shell=True)
-            print(output.decode())
+            task = self.args.task.lower()
 
             while True:
-
-                log.info("Do you want to do another task? ")
-
-                new_task = input("task:> ")
-                if "\n" in new_task:
-                    log.info("finishing...")
+                log.info("Implementing the testing")
+                testing(self.tasks[task])
+                # output = subprocess.check_output("flask test", 
+                #         stderr=subprocess.STDOUT, shell=True)
+                # print(output.decode())
         except Exception as e:
-            # log.warn("Something went wrong!")
+            log.warn("Something went wrong!")
             print(f"{str(e)}")
             exit(1)
         except KeyboardInterrupt:

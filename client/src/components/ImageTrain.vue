@@ -29,27 +29,6 @@
         </div>
       </div>
       <div class="col-md-5">
-        <!-- <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">Puntajes de entrenamiento</h5>
-          </div>
-          <div class="card-body">
-            <table class="table table-stripped">
-              <thead>
-                <tr>
-                  <th scope="col">Precisión</th>
-                  <th scope="col">Pérdida</th>
-                </tr>
-              </thead>
-              <tbody v-bind:key="vals.index" v-for="vals in values">
-                <tr>
-                  <td>{{ vals.accuracy }}</td>
-                  <td>{{ vals.loss }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div> -->
         <Metrics/>
       </div>
       <div class="col-md-1"></div>
@@ -103,20 +82,8 @@ export default {
       imageData: null,
     };
   },
-  created() {
-    //this.loadHistory();
-  },
+  created() {},
   methods: {
-    // loadHistory() {
-    //   axios
-    //     .get("http://127.0.0.1:5000/about_model")
-    //     .then((res) => {
-    //       this.values.push(res.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
     onChange(event) {
       this.imageData = event.target.files[0];
     },
@@ -156,4 +123,3 @@ export default {
 }
 </style>
 
-/* v-bind:key="index" v-for="(item, key, index) in convolution[0]" */
