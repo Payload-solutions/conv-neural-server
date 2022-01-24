@@ -38,10 +38,10 @@ def test_post_image(image: str) -> Dict[str, str]:
     :params:image the file of location of the specific 
             image to make the prediction
     """
-    file_path = "temp/image/hola.png"
+    # file_path = "temp/image/hola.png"
     model, _  = load_model()
     
-    img = Image.open(file_path)
+    img = Image.open(image)
     img = img.resize((64,64))
     img = img_to_array(img)
     img = img/255.0

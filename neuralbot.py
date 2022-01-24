@@ -169,14 +169,27 @@ class ArthurBot:
         try:
             log.info("Implementing the testing")
             # testing(self.tasks[task])
-            output = subprocess.check_output("flask test", stderr=subprocess.STDOUT, shell=True)
+            output = subprocess.check_output("flask test", 
+                    stderr=subprocess.STDOUT, shell=True)
             print(output.decode())
+
+            while True:
+
+                log.info("Do you want to do another task? ")
+
+                new_task = input("task:> ")
+                if "\n" in new_task:
+                    log.info("finishing...")
         except Exception as e:
             # log.warn("Something went wrong!")
             print(f"{str(e)}")
             exit(1)
+        except KeyboardInterrupt:
+            log.warn("finishing...")
+            exit(0)
         finally:
             log.success("testing finsihed, no errors ocurred!")
+        
 
     def save_roadmap(self,
                      content: Any,
