@@ -8,6 +8,7 @@ Every time that the bot verify taht
 from .lib.shell_process import shell_execution
 from .lib.generics import ExaminePath
 import subprocess
+import requests
 
 
 def testing(task_path: ExaminePath) -> ExaminePath:
@@ -17,20 +18,20 @@ def testing(task_path: ExaminePath) -> ExaminePath:
     # content = shell_execution(f"{command}")
     # print(content)
 
-    output = subprocess.check_output("flask test", stderr=subprocess.STDOUT, shell=True)
+    output = subprocess.check_output(
+        "flask test", stderr=subprocess.STDOUT, shell=True)
 
     print(output.decode())
 
 
-
-def examine(task_path: ExaminePath, listen: bool=True) -> ExaminePath:
+def examine(task_path: ExaminePath, listen: bool = True) -> ExaminePath:
     command = task_path["command"]
     target = task_path["target"]
     description = task_path["description"]
 
     content = shell_execution(cmd_command=f"{command} \
         {target} | wc -l")
-    
+
     task_path["content"] = content
     return task_path
 
@@ -41,3 +42,31 @@ def evaluate(task_path: ExaminePath) -> ExaminePath:
     description = task_path["description"]
     content = shell_execution(cmd_command=f"{command}")
     print(content)
+
+
+def test_url_method(url: str) -> bool:
+
+    sess = requests.session()
+    ress = sess.post(url=url, files={
+        "formImageFiles": open("arturo.jpg", "rb")
+        })
+    print(ress.text)
+
+
+
+
+
+# utilities
+def choose_the_bigger():
+    data_val = {
+        "prediction": {
+            "low": "0.6167120933532715",
+            "non": "0.006852846127003431",
+            "reg": "0.3764350414276123"
+        }
+    }
+    pred = data_val["prediction"]
+    list_acc = sorted([pred[x] for x in pred], reverse=True)
+    bigger = {key: val for key, val in pred.items()
+              if val == list_acc[0]}
+    return bigger

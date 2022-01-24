@@ -52,7 +52,8 @@ def create_routes(app: flask.app.Flask) -> None:
         return jsonify(performing_values())
 
     @app.route("/train", methods=["POST"])
-    @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+    @cross_origin(origin='localhost', headers=['Content- Type',
+        'Authorization'])
     def train():
         try:
             files = request.files.get('formImageFiles')
@@ -67,12 +68,8 @@ def create_routes(app: flask.app.Flask) -> None:
                 files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 content = test_post_image(f"temp/image/{filename}")
                 
-                # return jsonify({
-                #     "non":non,
-                #     "low":low,
-                #     "reg":reg
-                # })
-                return jsonify({"ok":content})
+                # return jsonify({"prediction":content})
+                return jsonify(response_conv_handler(content=content))
             except Exception as e:
                 return jsonify(response_conv_handler(
                     message="Error trying to parse the image",
@@ -81,3 +78,6 @@ def create_routes(app: flask.app.Flask) -> None:
             return jsonify(response_conv_handler(
                 message="Error trying to receive the image",
                 type="ERROR"))
+
+
+

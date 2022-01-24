@@ -1,23 +1,27 @@
 
-from typing import Any
+from typing import (
+    Any,
+    Dict
+)
 
 
-def response_conv_handler(message: str,
-                  type: str = "SUCESS", **content):
-    print(content)
+
+def response_conv_handler(message: Any=None,
+        type: str = "SUCCESS", content=None):
+
     if type == "ERROR":
+        if message is not None:
+            return {
+                "type": "ERROR",
+                "description":message
+            }
+        else:
+            return {
+                "type":"ERROR",
+                "description":"Not process"
+            }
+    if content is not None:
         return {
-            "type": "ERROR",
-            "description":message
+            "type":"SUCESS",
+            "content":content 
         }
-    
-    return {
-        "type":"SUCESS",
-        "description":message,
-        "content": {
-            "low_prediction":content["low"],
-            "non_prediction":content["non"],
-            "reg_prediction":content["reg"]
-        }
-
-    }
