@@ -23,7 +23,8 @@ import os
 def allowed_files(filename: str):
     ALLOWED_EXTENSIONS = {
         'png',
-        'jpg'
+        'jpg',
+        'jpeg'
     }
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower()\

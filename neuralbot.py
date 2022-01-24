@@ -164,25 +164,20 @@ class ArthurBot:
 
     def testing_tasks(self):
 
-        
         try:
             task = self.args.task.lower()
-
-            while True:
-                log.info("Implementing the testing")
-                testing(self.tasks[task])
-                # output = subprocess.check_output("flask test", 
-                #         stderr=subprocess.STDOUT, shell=True)
-                # print(output.decode())
+            pprint(self.tasks[task])
+            log.info("Implementing the testing")
+            testing(self.tasks[task])
         except Exception as e:
-            log.warn("Something went wrong!")
+            log.warn(f"Something went wrong in the {task}!")
             print(f"{str(e)}")
             exit(1)
         except KeyboardInterrupt:
             log.warn("finishing...")
             exit(0)
         finally:
-            log.success("testing finsihed, no errors ocurred!")
+            log.success(f"{task} finsihed, no errors ocurred!")
         
 
     def save_roadmap(self,
@@ -203,6 +198,22 @@ class ArthurBot:
         time.sleep((duration*60))
 
 
+    def run(self):
+
+        task, listen = self.args.task, self.args.listen
+        
+        while True:
+            try:
+                log.info(f"currently task active {task}")
+                time.sleep(2)
+                task = "testing"
+            except KeyboardInterrupt:
+                log.warn(f"finishing the {task}")
+                exit(0)
+
+
+
+
 def main():
     parser = argparse.ArgumentParser(description='AthurBot, virtual \
             assistant',
@@ -212,6 +223,10 @@ def main():
 
             2) Here is the content of the possibles task to perform by
                 the bot
+            
+            3) If you want to use the automatic task, first you must to
+                select --task automatic or -t auotmatic, followd by the 
+                -l or --listen to make the bot automatic for several tasks
     """))
 
     parser.add_argument('-t', '--task',
@@ -237,6 +252,9 @@ def main():
         
         elif args.task == "testing":
             bot.testing_tasks()
+
+        elif args.task == "automatic":
+            bot.run()
         
         # elif args.task == 
 
