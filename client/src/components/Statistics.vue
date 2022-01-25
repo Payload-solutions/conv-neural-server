@@ -22,3 +22,12 @@
     }
 }
 </script>
+
+<style >
+    .statistics{
+        padding-top: 50px;
+        padding-left: 60px;
+        height: 75%;
+        width: 90%;
+    }
+</style>

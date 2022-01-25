@@ -32,24 +32,47 @@ export const StatisticsValuesData = {
     labels: dataLabels,
     datasets: [
       {
-        label: "accuracy",
+        label: "Precisión",
         data: accuracy,
         backgroundColor: "rgba(236, 250, 242, 0.83)",
         borderColor: "#36495d",
-        borderWidth: 3,
+        borderWidth: 2,
       },
       {
-        label: "valAccuracy",
+        label: "Validación de precisión",
         data: valAccuracy,
-        backgroundColor: "rgba(16, 24, 19, 0.83)",
+        backgroundColor: "rgba(236, 250, 242, 0.83)",
+        borderColor: "#47b784",
+        borderWidth: 3,
+      },{
+        label: "Pérdida",
+        data: loss,
+        backgroundColor: "rgba(236, 250, 242, 0.83)",
+        borderColor: "#9aa2c7",
+        borderWidth: 3,
+      },{
+        label: "Validación de pérdida",
+        data: valLoss,
+        backgroundColor: "rgba(236, 250, 242, 0.83)",
         borderColor: "#47b784",
         borderWidth: 3,
       },
+
+
     ],
   },
   options: {
     responsive: true,
-    lineTension: 1,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Line Chart'
+      }
+    },
+    lineTension: 2,
     scales: {
       yAxes: [
         {

@@ -5,6 +5,13 @@
       <div class="col-md-5">
         <div class="card">
           <div class="card-header">
+            <b-alert
+              v-model="showDismissibleAlert"
+              variant="danger"
+              dismissible
+            >
+              Dismissible Alert!
+            </b-alert>
             <h5 class="card-title">Prueba de convolución</h5>
           </div>
           <div class="card-body">
@@ -29,7 +36,7 @@
         </div>
       </div>
       <div class="col-md-5">
-        <Metrics/>
+        <Metrics />
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-1"></div>
@@ -71,13 +78,14 @@
 
 <script>
 import axios from "axios";
-import Metrics from '../containers/Metrics.vue';
+import Metrics from "../containers/Metrics.vue";
 export default {
   name: "ImageTrain",
   props: ["imageTrain"],
   data() {
     return {
       values: [],
+      showDismissibleAlert: false,
       convolution: [],
       imageData: null,
     };
@@ -98,6 +106,12 @@ export default {
           },
         })
         .then((response) => {
+          console.log(response.data.type);
+          //let message = response.data.type;
+
+          if (response.data.type === "ERROR"){
+            this.showDismissibleAlert = true;
+          }
           this.convolution.push(response.data.content);
           console.log(this.convolution);
         });
@@ -106,9 +120,9 @@ export default {
       window.location.reload();
     },
   },
-  components:{
-      Metrics
-  }
+  components: {
+    Metrics,
+  },
 };
 </script>
 
@@ -122,4 +136,3 @@ export default {
   padding-top: 20px;
 }
 </style>
-

@@ -76,6 +76,7 @@ def create_routes(app: flask.app.Flask) -> None:
                 except Exception as e:
                     print(str(e))
                 # print("image saved ok")
+                print(response_conv_handler(content=content))
                 return jsonify(response_conv_handler(content=content))
             except Exception as e:
                 return jsonify(response_conv_handler(
