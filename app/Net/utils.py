@@ -112,5 +112,6 @@ def selection_image(convolution_prove: Dict[str, float],
         else:
             img.save(
                 f"app/Net/image_set/train/Regular_yogurt/Regular_yogurt.{new_name}.png")
+        os.remove(f"temp/image/{temporal_file}")
     else:
         os.remove(f"temp/image/{temporal_file}")

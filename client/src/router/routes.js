@@ -17,7 +17,7 @@ const routes = [
     },
     {
         path:'/stats',
-        component:() => import('../components/Statistics.vue'),
+        component:() => import('../components/PlottingChart.vue'),
         name: "stats"
     },
     {

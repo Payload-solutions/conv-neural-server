@@ -13,8 +13,8 @@
         </thead>
         <tbody v-bind:key="vals.index" v-for="vals in values">
           <tr>
-            <td>{{ vals.accuracy }}</td>
-            <td>{{ vals.loss }}</td>
+            <td>{{ vals.accuracy }} %</td>
+            <td>{{ vals.loss }} %</td>
           </tr>
         </tbody>
       </table>

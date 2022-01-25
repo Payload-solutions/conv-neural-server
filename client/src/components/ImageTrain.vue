@@ -10,7 +10,7 @@
               variant="danger"
               dismissible
             >
-              Dismissible Alert!
+              Error en la predicción, debes enviar archivos tipo imágenes.
             </b-alert>
             <h5 class="card-title">Prueba de convolución</h5>
           </div>
@@ -109,11 +109,12 @@ export default {
           console.log(response.data.type);
           //let message = response.data.type;
 
-          if (response.data.type === "ERROR"){
+          if (response.data.type === "ERROR") {
             this.showDismissibleAlert = true;
+          } else {
+            this.convolution.push(response.data.content);
+            console.log(this.convolution);
           }
-          this.convolution.push(response.data.content);
-          console.log(this.convolution);
         });
     },
     reloadPage() {
