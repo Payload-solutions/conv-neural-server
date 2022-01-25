@@ -27,12 +27,6 @@ import subprocess
 from pprint import pprint
 import argparse
 import yaml
-
-# # Custom proccess
-# from neuralbot.core.lib.generics import RoadMapFile
-# from neuralbot.core.errors.error_exceptions import *
-
-# from neu
 from neuralbot.core.tasks import (
     testing,
     examine,
@@ -88,18 +82,6 @@ NEW_TASK_CONTENT = """
 """
 
 
-class FileFormaterError(Exception):
-    def __init__(self, message: str = """The format file that
-    you're trying to use it's not permited for this function
-    Files permited:
-        -json
-        -yaml
-        -yml
-    """):
-        self.message = message
-        super().__init__(self.message)
-
-
 class ArthurBot:
 
     def __init__(self, path: str, args: Any):
@@ -113,6 +95,21 @@ class ArthurBot:
 
         self.tasks = self.task_file["tasks"]
         self.pid = os.getpid()
+
+        self.train_dir = self.image_directory("train")
+        self.test_dir = self.image_directory("test")
+        self.valid_dir = self.image_directory("validator")
+
+    def image_directory(self, directory: str):
+        low = len(os.listdir(f"app/Net/image_set/{directory}/Low_fat_yogurt"))
+        non = len(os.listdir(f"app/Net/image_set/{directory}/Non_fat_yogurt"))
+        reg = len(os.listdir(f"app/Net/image_set/{directory}/Regular_yogurt"))
+
+        return {
+            "low":low,
+            "non":non,
+            "reg":reg
+        }
 
     def overwrite(self, content: Any, file_type: str = "json"):
         file_type = file_type.lower()
@@ -199,6 +196,7 @@ class ArthurBot:
 
 
     def run(self):
+        # automatic function
 
         task, listen = self.args.task, self.args.listen
         

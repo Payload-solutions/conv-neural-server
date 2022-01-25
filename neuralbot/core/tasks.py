@@ -5,11 +5,15 @@ Every time that the bot verify taht
 :author: Arturo Negreiros (aka H0n3yL04d)
 """
 
+from PIL import Image
 from .lib.shell_process import shell_execution
 from .lib.generics import ExaminePath
 import subprocess
 import requests
 import hashlib
+import os
+
+
 
 def testing(task_path: ExaminePath) -> ExaminePath:
     """
@@ -51,49 +55,65 @@ def test_url_method(url: str) -> bool:
     print(ress.text)
 
 
-# utilities
-def choose_the_bigger():
-    data_val = {
-        "prediction": {
-            "low": "0.6167120933532715",
-            "non": "0.006852846127003431",
-            "reg": "0.3764350414276123"
-        }
-    }
-    pred = data_val["prediction"]
-    list_acc = sorted([pred[x] for x in pred], reverse=True)
-    bigger = {key: val for key, val in pred.items()
-              if val == list_acc[0]}
-    return bigger
+# # utilities
+# def choose_the_bigger():
+#     data_val = {
+#         "prediction": {
+#             "low": "0.6167120933532715",
+#             "non": "0.006852846127003431",
+#             "reg": "0.3764350414276123"
+#         }
+#     }
+#     pred = data_val["prediction"]
+#     list_acc = sorted([pred[x] for x in pred], reverse=True)
+#     bigger = {key: val for key, val in pred.items()
+#               if val == list_acc[0]}
+#     return bigger
 
 
-# hasing files
-def encoding_file_name(file_name: str) -> str:
-    file_name = file_name.split(".")[0]
-    file_encoded = hashlib.md5(file_name.encode()).hexdigest()
-    return file_encoded+".png"
+# # hasing files
+# def encoding_file_name(file_name: str) -> str:
+#     file_name = file_name.split(".")[0]
+#     file_encoded = hashlib.md5(file_name.encode()).hexdigest()
+#     return file_encoded
 
 
 
-def selection_image(convolution_prove: Dict[str, float],
-                    temporal_path: str) -> None:
-    r"""
-    Basically, this function it's whenever neural training have 
-    to make a decission for the image saved in the tem/image
+# def selection_image(convolution_prove: Dict[str, float],
+#                     temporal_file: str) -> None:
+#     r"""
+#     Basically, this function it's whenever neural training have 
+#     to make a decission for the image saved in the tem/image
 
-    >>> if the accuracy is lesser or equal to the max accuracy
-        and greter the loss value, then save the image in the
+#     >>> if the accuracy is lesser or equal to the max accuracy
+#         and greter the loss value, then save the image in the
 
-    :params: convolution_prove=The content whenever a test of
-                image works, but we need to know if the value 
-                it's secure to save in the folders for the neural
-                test.
+#     :params: convolution_prove=The content whenever a test of
+#                 image works, but we need to know if the value 
+#                 it's secure to save in the folders for the neural
+#                 test.
 
-                if convolution_prove["wherever key"] <= 0.74 \
-                    and convolution_prove["wherever key] > 0.68:
+#                 if convolution_prove["wherever key"] <= 0.74 \
+#                     and convolution_prove["wherever key] > 0.68:
 
-                    save_the_image("path_image")
-                else:
-                    remove_image_from_temporal_folder 
-    """
-    pass
+#                     save_the_image("path_image")
+#                 else:
+#                     remove_image_from_temporal_folder
+#     :params: temporal_file= the file saved temporaly for analyzing
+#     """
+
+#     category, value = list(convolution_prove.keys())[0],\
+#         list(convolution_prove.keys())[0]
+
+#     if float(value)<= 80.0 and float(value)>63.0:
+#         new_name = encoding_file_name(temporal_file)
+#         category = category.capitalize()
+#         img = load_img(f"temp/image/{temporal_file}")
+#         if category == "Low":
+#             img.save(f"app/Net/image_set/train/{category}_fat_yogurt/{category}_fat_yogurt.{new_name}.png")
+#         elif category == "Non":
+#             img.save(f"app/Net/image_set/train/{category}_fat_yogurt/{category}_fat_yogurt.{new_name}.png")
+#         else:
+#             img.save(f"app/Net/image_set/train/Regular_yogurt/Regular_yogurt.{new_name}.png")
+#     else:
+#         os.remove(f"temp/image/{temporal_file}")

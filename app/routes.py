@@ -9,7 +9,8 @@ from .Net.execute_model import (
 )
 from .Net.utils import (
     performing_values,
-    accuracy_loss_handler
+    accuracy_loss_handler,
+    selection_image
 )
 from .handler_messages import response_conv_handler
 from .handlers import allowed_files
@@ -24,7 +25,8 @@ def allowed_files(filename: str):
     ALLOWED_EXTENSIONS = {
         'png',
         'jpg',
-        'jpeg'
+        'jpeg',
+        'JPEG'
     }
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower()\
@@ -69,8 +71,11 @@ def create_routes(app: flask.app.Flask) -> None:
                 files.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 content = test_post_image(f"temp/image/{filename}")
                 
-                print(content)
-                # return jsonify({"prediction":content})
+                try:
+                    selection_image(content, filename)
+                except Exception as e:
+                    print(str(e))
+                # print("image saved ok")
                 return jsonify(response_conv_handler(content=content))
             except Exception as e:
                 return jsonify(response_conv_handler(
