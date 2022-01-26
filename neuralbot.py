@@ -95,7 +95,9 @@ class ArthurBot:
 
         self.tasks = self.task_file["tasks"]
         self.pid = os.getpid()
-
+        
+        # the original size of the 
+        # train, test and validator directory...
         self.train_dir = self.image_directory("train")
         self.test_dir = self.image_directory("test")
         self.valid_dir = self.image_directory("validator")
@@ -105,11 +107,15 @@ class ArthurBot:
         non = len(os.listdir(f"app/Net/image_set/{directory}/Non_fat_yogurt"))
         reg = len(os.listdir(f"app/Net/image_set/{directory}/Regular_yogurt"))
 
-        return {
+        dir_object =  {
             "low":low,
             "non":non,
             "reg":reg
         }
+
+        all_dir = sum([x for k, x in dir_object.items()])
+
+        return all_dir
 
     def overwrite(self, content: Any, file_type: str = "json"):
         file_type = file_type.lower()
@@ -201,14 +207,29 @@ class ArthurBot:
         # automatic function
 
         task, listen = self.args.task, self.args.listen
+        log.info("Loading the number of the directory...")
+        print(self.train_dir)
+        
         
         while True:
+            self.train_dir = self.image_directory("train")
             try:
-                log.info(f"currently task active {task}")
-                time.sleep(2)
-                task = "testing"
+                train_dir = self.train_dir
+                log.info(f"The current size of the directory is {train_dir}")
+                new_train_dir = self.image_directory("train")
+                time.sleep(3)
+                log.info(f"The new current directory size {new_train_dir}")
+
+                time.sleep(3)
+                log.info("initializing the training...")
+                evaluate(self.tasks["evaluate"])
+                # self.go_to_sleep(2)
+                
             except KeyboardInterrupt:
                 log.warn(f"finishing the {task}")
+                exit(0)
+            except Exception as e:
+                print(str(e))
                 exit(0)
 
 
@@ -253,7 +274,7 @@ def main():
         elif args.task == "testing":
             bot.testing_tasks()
 
-        elif args.task == "automatic":
+        elif args.task == "automatic" and args.listen:
             bot.run()
         
         # elif args.task == 

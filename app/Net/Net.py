@@ -92,7 +92,7 @@ class Net:
         with open("app/Net/.history_dict", "wb") as file:
             pickle.dump(file)
 
-    def neural_model(self, train_generator: Any, valid_generator: Any) -> Any:
+    def neural_model(self) -> Any:
 
         model = Sequential()
 
@@ -179,14 +179,41 @@ class Net:
 
         checkpoint = ModelCheckpoint("lib/.bacteria_trained_new_model.hdf5", monitor="accuracy",
                                      verbose=1, save_best_only=True)
-        if os.path.exists(self.weights):
-            model.load_weights(self.weights)
-        else:
+        # if os.path.exists(self.weights):
+        #     model.load_weights(self.weights)
+        # else:
 
-            model.fit(train_generator,
-                      steps_per_epoch=531//32,
-                      epochs=500,
-                      validation_data=valid_generator,
-                      validation_steps=76//32,
-                      callbacks=[checkpoint])
+        #     hist = model.fit(train_generator,
+        #                      steps_per_epoch=531//32,
+        #                      epochs=220,
+        #                      validation_data=valid_generator,
+        #                      validation_steps=76//32,
+        #                      callbacks=[checkpoint])
+        #     with open('/lib/history_dict', 'wb') as file_pi:
+        #         pickle.dump(hist.history, file_pi)
+
         return model
+
+    def run_model(self):
+        train_generator, valid_generator, _ = self.load_image_set()
+        checkpoint = ModelCheckpoint("lib/.bacteria_trained_new_model.hdf5", monitor="accuracy",
+                                     verbose=1, save_best_only=True)
+        model = self.neural_model()
+        hist = model.fit(train_generator,
+                         steps_per_epoch=531//32,
+                         epochs=220,
+                         validation_data=valid_generator,
+                         validation_steps=76//32,
+                         callbacks=[checkpoint])
+
+        with open('/lib/history_dict', 'wb') as file_pi:
+            pickle.dump(hist.history, file_pi)
+    
+    def load_model_weights(self):
+        model = self.neural_model()
+        model.load_weights(self.weights)
+
+        return model
+
+
+

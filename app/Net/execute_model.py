@@ -20,16 +20,16 @@ def load_model():
         valid_path="app/Net/image_set/validator"
         )
     
-    train_generator, test_generator, valid_generator = net.load_image_set()
-    model = net.neural_model(train_generator, valid_generator)
+    # train_generator, test_generator, valid_generator = net.load_image_set()
+    model = net.load_model_weights()
 
-    return model, test_generator
+    return model
 
 
-def execute_model():
-    model, test_generator = load_model()
+# def execute_model():
+#     model, test_generator = load_model()
 
-    return model.evaluate(test_generator)[1]
+#     return model.evaluate(test_generator)[1]
 
 
 def test_post_image(image: str) -> Dict[str, str]:
@@ -39,7 +39,7 @@ def test_post_image(image: str) -> Dict[str, str]:
             image to make the prediction
     """
     # file_path = "temp/image/hola.png"
-    model, _  = load_model()
+    model  = load_model()
     
     img = Image.open(image)
     img = img.resize((64,64))
@@ -54,3 +54,14 @@ def test_post_image(image: str) -> Dict[str, str]:
         "non":f"{prediction[0][1]}",
         "reg":f"{prediction[0][2]}"
     }
+
+
+def train_model():
+
+    net = Net(
+        train_path="app/Net/image_set/train", 
+        test_path="app/Net/image_set/test", 
+        valid_path="app/Net/image_set/validator"
+        )
+    
+    model = net.run_model()

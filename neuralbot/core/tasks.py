@@ -39,11 +39,11 @@ def examine(task_path: ExaminePath, listen: bool = True) -> ExaminePath:
 
 def evaluate(task_path: ExaminePath) -> ExaminePath:
     command = task_path["command"]
-    target = task_path["target"]
-    description = task_path["description"]
-    content = shell_execution(cmd_command=f"{command}")
-    print(content)
-
+    # target = task_path["target"]
+    # description = task_path["description"]
+     #content = shell_execution(cmd_command=f"{command}")
+    # os.system(command)
+    shell_execution(cmd_command=command)
 
 def test_url_method(url: str) -> bool:
 

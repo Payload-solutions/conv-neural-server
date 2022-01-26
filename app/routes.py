@@ -4,7 +4,7 @@ from flask import (
 )
 import flask
 from .Net.execute_model import (
-    execute_model,
+    # execute_model,
     test_post_image
 )
 from .Net.utils import (

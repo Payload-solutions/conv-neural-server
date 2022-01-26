@@ -17,7 +17,7 @@
         },
         "evaluate":{
             "description":"virtual assistant for the improving of the neural network accuracy",
-            "command":"python -c 'from app.Net.execute_model import execute_model; execute_model()",
+            "command":"python -c 'from app.Net.execute_model import train_model; train_model()'",
             "target":".bacteria_trained.hdf5",
             "enumerate folders":"ls",
             "accuracy":""
