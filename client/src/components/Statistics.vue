@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="statistics">
+      <!-- <h5 class="card-title">Histórico de precisión</h5> -->
       <canvas id="statistics-vals-data"></canvas>
     </div>
   </div>

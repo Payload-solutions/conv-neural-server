@@ -161,6 +161,8 @@ class ArthurBot:
 
     def testing_tasks(self):
 
+        os.environ["FLASK_ENV"] = "testing"
+
         try:
             task = self.args.task.lower()
             pprint(self.tasks[task])

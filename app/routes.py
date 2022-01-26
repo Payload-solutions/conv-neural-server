@@ -76,16 +76,19 @@ def create_routes(app: flask.app.Flask) -> None:
                 except Exception as e:
                     print(str(e))
                 # print("image saved ok")
-                print(response_conv_handler(content=content))
-                print(response_conv_handler(content=content))
+                # print(response_conv_handler(content=content))
+                # print(response_conv_handler(content=content))
                 return jsonify(response_conv_handler(content=content))
             except Exception as e:
-                print(response_conv_handler(content=content))
+                print(response_conv_handler(
+                message="Error trying to parse the image",
+                type="ERROR"))
+
                 return jsonify(response_conv_handler(
                     message="Error trying to parse the image",
                     type="ERROR"))
         except Exception as e:
-            print(response_conv_handler(content=content))
+            print(str(e))
             return jsonify(response_conv_handler(
                 message="Error trying to receive the image",
                 type="ERROR"))

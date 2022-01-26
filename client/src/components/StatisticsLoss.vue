@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="statisticsLoss">
+      <!-- <h5 class="card-title">Histórico de pérdida</h5> -->
       <canvas id="statistics-loss-data"></canvas>
     </div>
   </div>

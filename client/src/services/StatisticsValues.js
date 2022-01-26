@@ -36,87 +36,30 @@ export const StatisticsValuesData = {
         data: accuracy,
         backgroundColor: "rgba(236, 250, 242, 0.83)",
         borderColor: "#36495d",
-        borderWidth: 2,
+        borderWidth: 3,
       },
       {
         label: "Validación de precisión",
         data: valAccuracy,
         backgroundColor: "rgba(236, 250, 242, 0.83)",
         borderColor: "#f4a94d",
-        borderWidth: 2,
+        borderWidth: 3,
       }
     ],
   },
   options: {
     responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Chart.js Line Chart'
-      }
-    },
-    lineTension: 2,
+    lineTension: 1,
     scales: {
       yAxes: [
         {
           ticks: {
             beginAtZero: true,
-            padding: 40,
+            padding: 25,
           },
         },
       ],
     },
   },
 };
-
-// export const StatisticsLoss = {
-//   type: "line",
-//   data: {
-//     labels: dataLabels,
-//     datasets: [
-//       {
-//         label: "Pérdida",
-//         data: loss,
-//         backgroundColor: "rgba(236, 250, 242, 0.83)",
-//         borderColor: "#9aa2c7",
-//         borderWidth: 2,
-//       },{
-//         label: "Validación de pérdida",
-//         data: valLoss,
-//         backgroundColor: "rgba(236, 250, 242, 0.83)",
-//         borderColor: "#47b784",
-//         borderWidth: 2,
-//       },
-
-
-//     ],
-//   },
-//   options: {
-//     responsive: true,
-//     plugins: {
-//       legend: {
-//         position: 'top',
-//       },
-//       title: {
-//         display: true,
-//         text: 'Chart.js Line Chart'
-//       }
-//     },
-//     lineTension: 2,
-//     scales: {
-//       yAxes: [
-//         {
-//           ticks: {
-//             beginAtZero: true,
-//             padding: 40,
-//           },
-//         },
-//       ],
-//     },
-//   },
-// }
-
 export default StatisticsValuesData;
