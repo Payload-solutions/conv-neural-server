@@ -9,6 +9,7 @@ in the parser arguments, try to make your training,
 
 """
 
+
 from subprocess import(
     check_output,
     STDOUT
@@ -32,7 +33,8 @@ from neuralbot.core.tasks import (
     examine,
     evaluate
 )
-
+from neuralbot.core.lib.banner import BANNER
+# from app.Net.execute_model import train_model
 try:
     import yaml
 except ImportError as e:
@@ -40,51 +42,10 @@ except ImportError as e:
             the pip install pyyaml")
 
 
-NEW_TASK_CONTENT = """
-{
-    "tasks":{
-        "examine":{
-          "command":"ls -l",
-          "target":"file_test_dirs",
-          "content": "",
-          "description":"enumerate all folder content to \
-                  get the actual content"
-        },
-        "replicate":{
-            "command": "cp",
-            "target":"",
-            "description":"clone differents files from \
-                    the director target"
-        },
-        "execute":{
-            "command":"./",
-            "target":"",
-            "description":"run an executable file of the \
-                    following form: './example.py' "
-        },
-        "evaluate":{
-            "description":"virtual assistant for the improving \
-                    of the neural network accuracy",
-            "command":"python ",
-            "target":".bacteria_trained.hdf5",
-            "enumerate folders":"ls",
-            "accuracy":"",
-            "content":""
-        },
-        "testing":{
-            "description":"testing the web application",
-            "command":"python ",
-            "target":"tests/"
-        }
-    }
-}
-
-"""
-
-
 class ArthurBot:
 
     def __init__(self, path: str, args: Any):
+        print(BANNER)
         self.args = args
         log.progress("Executing bot. ready for tasks")
         time.sleep(2)
@@ -206,24 +167,29 @@ class ArthurBot:
     def run(self):
         # automatic function
 
-        task, listen = self.args.task, self.args.listen
         log.info("Loading the number of the directory...")
-        print(self.train_dir)
+
         
-        
+        # from app.Net.execute_model import train_model
+
         while True:
-            self.train_dir = self.image_directory("train")
+            train_dir = self.image_directory("train")
             try:
-                train_dir = self.train_dir
-                log.info(f"The current size of the directory is {train_dir}")
-                new_train_dir = self.image_directory("train")
+                
+                log.info(f"The current size of the directory is {self.train_dir}")
                 time.sleep(3)
-                log.info(f"The new current directory size {new_train_dir}")
+                log.info(f"The new current directory size {train_dir}")
 
                 time.sleep(3)
                 log.info("initializing the training...")
-                evaluate(self.tasks["evaluate"])
-                # self.go_to_sleep(2)
+
+                if abs(train_dir - self.train_dir) >= 3:
+                    log.info("there are a difference in the directories")
+                    log.info("Initializing the neural train")
+                    
+                    os.system("python -c 'from app.Net.execute_model import train_model; train_model()'")
+
+                    log.info("Training finished, not errors ocurred")
                 
             except KeyboardInterrupt:
                 log.warn(f"finishing the {task}")
@@ -235,7 +201,7 @@ class ArthurBot:
 
 
 
-def main():
+def bot_initializer():
     parser = argparse.ArgumentParser(description='AthurBot, virtual \
             assistant',
             formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -283,6 +249,4 @@ def main():
         print(e)
         exit(1)
 
-
-if __name__ == "__main__":
-    main()
+bot_initializer()
