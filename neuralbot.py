@@ -168,7 +168,7 @@ class ArthurBot:
         # automatic function
 
         log.info("PRODUCTION MODE...")
-        log.info("checking fro new images to implement the neural training...")
+        log.info("checking for new images to implement the neural training...")
         while True:
             train_dir = self.image_directory("train")
             try:
@@ -181,7 +181,8 @@ class ArthurBot:
 
                     log.info("Training finished, not errors ocurred")
                     self.train_dir = train_dir
-                log.info("No news...")
+                log.info("No news..")
+                log.info("sleeping...")
                 self.go_to_sleep(5)
             except KeyboardInterrupt:
                 log.warn("Exiting...")

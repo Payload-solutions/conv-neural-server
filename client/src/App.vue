@@ -8,7 +8,7 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item :to="{name: 'image-train'}">entrenamiento</b-nav-item>
+            <b-nav-item :to="{name: 'image-train'}">predicción</b-nav-item>
             <!-- <b-nav-item :to="{name: 'home'}">info</b-nav-item> -->
             <b-nav-item :to="{name: 'stats'}">histórico</b-nav-item>
           </b-navbar-nav>
