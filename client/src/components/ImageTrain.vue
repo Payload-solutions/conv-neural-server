@@ -46,7 +46,7 @@
             v-show="convolution.length > 0"
             v-b-toggle.collapse-1
             variant="success"
-            >Toggle Collapse</b-button
+            >Revisar</b-button
           >
           <b-collapse id="collapse-1" class="mt-2">
             <b-card>
@@ -71,6 +71,38 @@
             >
           </b-collapse>
         </div>
+      </div>
+      <div class="col-md-5">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tipo de yogurt</th>
+              <th scope="col">Descripción</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Low</td>
+              <td>Yogur bajo en grasa</td>
+              
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Non</td>
+              <td>Yogur cero grasas</td>
+              
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Regular</td>
+              <td>Yogur grasa regular o normal</td>
+              
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

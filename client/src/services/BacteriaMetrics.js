@@ -21,19 +21,19 @@ export const BacteriaMetrics = {
         data: bacteriaArray,
         backgroundColor: "rgba(54,73,93,.5)",
           borderColor: "#36495d",
-        borderWidth: 4,
+        borderWidth: 3,
       },
     ],
   },
   options: {
     responsive: true,
-    lineTension: 3,
+    lineTension: 2,
     scales: {
       yAxes: [
         {
           ticks: {
             beginAtZero: true,
-            padding: 25,
+            padding: 40,
           },
         },
       ],

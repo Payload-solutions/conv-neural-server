@@ -167,21 +167,11 @@ class ArthurBot:
     def run(self):
         # automatic function
 
-        log.info("Loading the number of the directory...")
-
-        
-        # from app.Net.execute_model import train_model
-
+        log.info("PRODUCTION MODE...")
+        log.info("checking fro new images to implement the neural training...")
         while True:
             train_dir = self.image_directory("train")
             try:
-                
-                log.info(f"The current size of the directory is {self.train_dir}")
-                time.sleep(3)
-                log.info(f"The new current directory size {train_dir}")
-
-                time.sleep(3)
-                log.info("initializing the training...")
 
                 if abs(train_dir - self.train_dir) >= 3:
                     log.info("there are a difference in the directories")
@@ -190,13 +180,16 @@ class ArthurBot:
                     os.system("python -c 'from app.Net.execute_model import train_model; train_model()'")
 
                     log.info("Training finished, not errors ocurred")
-                
+                    self.train_dir = train_dir
+                log.info("No news...")
+                self.go_to_sleep(5)
             except KeyboardInterrupt:
-                log.warn(f"finishing the {task}")
+                log.warn("Exiting...")
                 exit(0)
             except Exception as e:
+                log.error(f"Error by {str(e)}")
                 print(str(e))
-                exit(0)
+                exit(1)
 
 
 
@@ -218,8 +211,6 @@ def bot_initializer():
 
     parser.add_argument('-t', '--task',
             help='task to do')
-    parser.add_argument('-m', '--mode',
-            help="indicate the mode to the neuron bot")
 
     parser.add_argument('-l', '--listen', action="store_true",
             help="indicate if the bot will be in listen mode or not")
