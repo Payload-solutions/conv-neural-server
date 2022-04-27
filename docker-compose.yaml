@@ -14,14 +14,8 @@ services:
       - "80:80"
     depends_on:
       - web
-  # bot:
-  #   build: ./ArthurBot
-  #   ports:
-  #     - "4000:4000"
-  #   depends_on:
-  #     - web
-  #   networks:
-  #     - default
+    networks:
+      - default
 
 networks:
   default:
