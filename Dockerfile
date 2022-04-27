@@ -1,4 +1,4 @@
-FROM python:3.10.1-alpine3.15
+FROM python:3.10.4
 
 RUN pip install --upgrade pip
 
@@ -13,8 +13,6 @@ ENV FLASK_ENV=development
 # ENV FLASK_RUN_HOST 0.0.0.0
 
 COPY requirements.txt requirements.txt
-
-RUN pip install tensorflow
 
 RUN pip install -r requirements.txt
 
