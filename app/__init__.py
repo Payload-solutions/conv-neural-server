@@ -25,8 +25,9 @@ def create_app() -> flask_app:
 
     app = Flask(__name__)
 
-    CORS(app, resources={r'/*': {'origins':'*'}})
+    # CORS(app, resources={r'/*': {'origins':'*'}})
     # getting the config environment
+    CORS(app, expose_headers=["x-suggested-filename", "x-suggested-filetype"])
     CONFIG_TYPE = get_environment_config()
     UPLOAD_FOLDER = 'temp/image/'
     app.config.from_object(CONFIG_TYPE)

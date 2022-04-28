@@ -131,7 +131,7 @@ export default {
       const formData = new FormData();
       formData.append("formImageFiles", this.imageData, this.imageData.name);
       axios
-        .post("http://localhost:5000/train", formData, {
+        .post("http://143.244.160.173:5000/train", formData, {
           headers: {
             Accept: "application/json",
             "Content-type": "application/json",

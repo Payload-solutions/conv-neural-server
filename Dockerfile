@@ -6,7 +6,7 @@ WORKDIR /neuronnetwork
 
 ENV FLASK_APP wsgi.py
 
-ENV FLASK_DEBUG=1
+ENV FLASK_DEBUG=0
 
 ENV FLASK_ENV=development
 
