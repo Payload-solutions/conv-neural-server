@@ -10,8 +10,6 @@ ENV FLASK_DEBUG=1
 
 ENV FLASK_ENV=development
 
-ENV FLASK_RUN_HOST 127.0.0.1
-
 COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt

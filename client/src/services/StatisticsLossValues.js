@@ -9,7 +9,7 @@ let dataFetched = [];
 let dataLabels = [];
 
 axios
-  .get("http://localhost:5000/history_values")
+  .get("http://127.0.0.1:5000/history_values")
   .then((res) => {
     dataFetched = res.data.message;
     

@@ -55,7 +55,7 @@ def create_routes(app: flask.app.Flask) -> None:
         return jsonify(performing_values())
 
     @app.route("/train", methods=["POST"])
-    @cross_origin(origin='localhost', headers=['Content- Type',
+    @cross_origin(origin='127.0.0.1', headers=['Content- Type',
         'Authorization'])
     def train():
         try:
